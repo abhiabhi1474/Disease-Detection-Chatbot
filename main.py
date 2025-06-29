@@ -1,0 +1,55 @@
+import pandas as pd
+df = pd.read_csv('/content/deases(1).csv')
+
+class deases:
+    def __init__(self, dataset_path):
+       self.data = pd.read_csv('/content/deases(1).csv')
+    def get_deases_info(self, tag):
+        deases = self.data[self.data['tag'].str.lower() == tag.lower()]
+        if not deases.empty:
+            return deases.to_dict(orient='records')[0]
+        else:
+            return None
+
+    def respond_to_query(self, query):
+        Tag = query.strip().lower()  # User input converted to lowercase and assigned to 'Tag'
+        deases_info = self.get_deases_info(Tag)  # Get deases information based on 'Tag'
+        if deases_info:
+            response_text=(f"\n**{deases_info['tag']}**:\n"
+                    f"- bot: {deases_info['patterns__001']}\n"
+                    f"- bot: {deases_info['patterns__002']}\n"
+                    f"- bot: {deases_info['patterns__003']}\n"
+                    f"- bot: {deases_info['patterns__004']}\n"
+                    f"- bot: {deases_info['patterns__005']}\n"
+                    f"- bot: {deases_info['patterns__006']}\n"
+                    f"- bot: {deases_info['patterns__007']}\n"
+
+                    f"\n- Solution-: {deases_info['responses__-']}\n")
+            for line in response_text.split('.' or '1'):
+              print(line)
+
+        else:
+            unique_tags = ', '.join(self.data['tag'].unique())
+            print("\nBot:Sorry, I don't have information about that disease.\n")
+
+# Load the chatbot
+chatbot = deases('/content/deases(1).csv')
+# Sample interaction
+   # Get unique values from the 'tag' column
+unique_tags = df['tag'].unique()
+
+# Print the unique tags
+for tag in unique_tags:
+    print(tag)
+
+
+while True:
+
+  user_input = input("Bot: Ask about a deases(or type 'exit' to quit): ").lower()
+  print("\nUser:"+user_input)
+
+  if user_input.lower() == 'exit' :
+    print("\nBot: BYE BYE\n")
+    break
+
+  chatbot.respond_to_query(user_input)
