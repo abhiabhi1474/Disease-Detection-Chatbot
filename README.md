@@ -67,7 +67,7 @@ User: cuts
 
 ---
 
-## 📚 Dataset Format (`diseases(1).csv`)
+## 📚 Dataset Format (`diseases.csv`)
 
 | tag  | patterns\_\_001   | patterns\_\_002 | ... | responses\_\_-                             |
 | ---- | ----------------- | --------------- | --- | ------------------------------------------ |
